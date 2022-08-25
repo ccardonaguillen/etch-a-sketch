@@ -76,6 +76,7 @@ function paintRainbow() {
 
 
 function changeSize() {
+    // When slider value is changed, read new value an redraw grid
     const slider = document.querySelector(".slider")
     slider.addEventListener('change', () => {
         drawGrid(slider.value);
@@ -85,9 +86,11 @@ function changeSize() {
 }
 
 function getCurrentMode() {
+    // Check the current paint mode
     let current_mode 
     const mode_buttons = document.querySelectorAll('.mode')
 
+    // Check which button is pressed = current paint mode
     mode_buttons.forEach(button => {
         if (button.classList.contains('active-btn')) {
             if (button.id === "plain") {
@@ -104,15 +107,19 @@ function getCurrentMode() {
 }
 
 function changeMode() {
+    // Change the current paint mode
     const mode_buttons = document.querySelectorAll('.mode')
     const current_size = document.querySelector(".slider").value;
 
+    // Add a listener to all the mode selection buttons
     mode_buttons.forEach(selection => {
         selection.addEventListener('click', () => {
             const mode = selection.id;
             const active = selection.classList.contains('active-btn');
 
+            // Check is the button is active, if so do nothing
             if (!active) {
+                // Else redraw the grid with the current slide value and select new mode
                 mode_buttons.forEach(button => button.classList.remove('active-btn'));
                 selection.classList.add('active-btn');
                 drawGrid(current_size);
@@ -131,6 +138,7 @@ function changeMode() {
 }
 
 function clearDraw() {
+    // Redraw grid without changing the size or mode selections
     const clear_button = document.querySelector('.clear-btn');
 
     clear_button.addEventListener('click', () => {
@@ -142,6 +150,7 @@ function clearDraw() {
 }
 
 function startApp() {
+    // Initialise grid and event listeners
     drawGrid(36);
     connectSquares(paintPlain);
     changeSize();
