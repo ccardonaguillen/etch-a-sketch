@@ -109,13 +109,13 @@ function getCurrentMode() {
 function changeMode() {
     // Change the current paint mode
     const mode_buttons = document.querySelectorAll('.mode')
-    const current_size = document.querySelector(".slider").value;
 
     // Add a listener to all the mode selection buttons
     mode_buttons.forEach(selection => {
         selection.addEventListener('click', () => {
             const mode = selection.id;
             const active = selection.classList.contains('active-btn');
+            const current_size = document.querySelector(".slider").value;
 
             // Check is the button is active, if so do nothing
             if (!active) {
@@ -123,6 +123,8 @@ function changeMode() {
                 mode_buttons.forEach(button => button.classList.remove('active-btn'));
                 selection.classList.add('active-btn');
                 drawGrid(current_size);
+
+                console.log(current_size)
 
                 if (mode === "plain") {
                     connectSquares(paintPlain);
