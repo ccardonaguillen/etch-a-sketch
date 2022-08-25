@@ -1,0 +1,50 @@
+@font-face {
+    font-family: 'rondoregular';
+    src: url('./fonts/rondo.ttf') format('truetype'),
+         url('./fonts/rondo-webfont.woff2') format('woff2'),
+         url('./fonts/rondo-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    background-color: rgb(89, 152, 152);
+    display: flex;
+    justify-content: center;
+}
+
+.frame {
+    background-color: rgb(165, 38, 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 54px;
+    border-radius: 40px;
+    box-shadow: black 5px 5px 10px;
+}
+
+.title {
+    font-family: rondoregular;
+    font-size: 54px;
+    font-weight: 1000;
+    color: rgb(255, 204, 0);
+    text-shadow: rgb(1, 1, 193) 3px 2px 1px;
+    margin: 16px;
+}
+
+.drawing-surface {
+    background-color: rgb(218, 218, 218);
+    width: 600px;
+    height: 600px;
+    margin: 86px;
+    margin-top: 0;
+    box-shadow: rgb(70, 18, 2) 0px -5px 5px,
+                rgb(70, 18, 2) -5px 0px 5px;
+}
+
+test {
+    color: rgb(218, 218, 218);
+    color: grey;
+    color: rgb(0, 0, 0);
+}
