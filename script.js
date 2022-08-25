@@ -6,10 +6,9 @@ function resetGrid() {
 }
 
 function drawGrid(ncol) {
-    // Clear drawing surface
-    resetGrid()
+    resetGrid();
 
-    // Setup new grid with specified number of squares per row/column
+     // Setup new grid with specified number of squares per row/column
     const drawing_surface = document.querySelector(".drawing-surface");
     drawing_surface.style.cssText = `display: grid;\
                                      grid-template-columns: repeat(${ncol}, 1fr);\
@@ -29,13 +28,12 @@ function drawGrid(ncol) {
     }
 }
 
-function connectSquares(paintFunction) {
+function connectSquares(mode) {
     // Add eventListener to all current squares with the specified paint function
     grid_squares = document.querySelectorAll('.grid-square');
 
     grid_squares.forEach(square => 
-                         square.addEventListener('mouseover',
-                                                 paintFunction));
+                         square.addEventListener('mouseover', mode));
 }
 
 function paintPlain() {
@@ -55,7 +53,7 @@ function paintGradual() {
         alpha = parseFloat(alpha[0])
         // Increase alpha by 0.1 up to 1
         const new_alpha = (alpha <= 1) ?
-                          (alpha + 0.1).toFixed(1) :
+                          (alpha + 0.3).toFixed(1) :
                           alpha;
 
         this.style['background-color'] = `rgba(0, 0, 0, ${new_alpha})`;
@@ -71,10 +69,84 @@ function paintRainbow() {
     for (let i = 0; i < rgb.length; i++) {
         rgb[i] = Math.floor(Math.random() * 255)
     }
-    
+
     // Paint square that color
     this.style['background-color'] = `rgb(${rgb.join(", ")})`;
 }
 
-drawGrid(10);
-connectSquares(paintPlain);
+
+function changeSize() {
+    const slider = document.querySelector(".slider")
+    slider.addEventListener('change', () => {
+        drawGrid(slider.value);
+        connectSquares(getCurrentMode());
+        }
+    )
+}
+
+function getCurrentMode() {
+    let current_mode 
+    const mode_buttons = document.querySelectorAll('.mode')
+
+    mode_buttons.forEach(button => {
+        if (button.classList.contains('active-btn')) {
+            if (button.id === "plain") {
+                current_mode = paintPlain;
+           } else if (button.id === "gradual") {
+                current_mode = paintGradual;
+           } else {
+                current_mode = paintRainbow;
+           }
+        }
+    })
+    
+    return current_mode
+}
+
+function changeMode() {
+    const mode_buttons = document.querySelectorAll('.mode')
+    const current_size = document.querySelector(".slider").value;
+
+    mode_buttons.forEach(selection => {
+        selection.addEventListener('click', () => {
+            const mode = selection.id;
+            const active = selection.classList.contains('active-btn');
+
+            if (!active) {
+                mode_buttons.forEach(button => button.classList.remove('active-btn'));
+                selection.classList.add('active-btn');
+                drawGrid(current_size);
+
+                if (mode === "plain") {
+                    connectSquares(paintPlain);
+                } else if (mode === "gradual") {
+                    connectSquares(paintGradual);
+                } else {
+                    connectSquares(paintRainbow);
+                }
+            }
+        })
+
+    })
+}
+
+function clearDraw() {
+    const clear_button = document.querySelector('.clear-btn');
+
+    clear_button.addEventListener('click', () => {
+        const current_size = document.querySelector(".slider").value;
+
+        drawGrid(current_size);
+        connectSquares(getCurrentMode());
+    })
+}
+
+function startApp() {
+    drawGrid(36);
+    connectSquares(paintPlain);
+    changeSize();
+    changeMode();
+    clearDraw();
+}
+
+startApp()

@@ -13,8 +13,21 @@
     <main>
         <div class="frame">
             <h1 class="title">Etch-A-Sketch</h1>
-            <div class="drawing-surface">
+            <div class="drawing-surface"></div>
 
+            <div class="selector-container">
+                <div class="container">
+                    <p class="text">Grid size:</p>
+                    <input type="range" class="slider" min="1" max="100" value="36" step="1" oninput="this.nextElementSibling.value = this.value + 'x' + this.value">
+                    <output class="slider-value">36x36</output>   
+                </div>
+                <div class="container">
+                    <p class="text">Paint mode:</p>
+                    <button id="plain" class="mode active-btn">Plain</button>
+                    <button id="gradual" class="mode">Gradual</button>
+                    <button id="rainbow" class="mode">Rainbow</button>
+                </div>
+                <button class="clear-btn">Clear</button>
             </div>
         </div>
     </main>
