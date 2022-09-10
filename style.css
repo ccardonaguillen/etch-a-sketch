@@ -24,11 +24,22 @@ body {
     box-shadow: black 5px 5px 10px;
 }
 
+.header {
+    display: grid;
+    grid-auto-flow: column;
+    align-items: center;
+}
+
+img {
+    height: 70px;
+    filter: drop-shadow(3px 2px 1px blue)
+}
+
 .title {
     font-family: rondoregular;
     font-size: 54px;
     font-weight: 1000;
-    color: rgb(255, 204, 0);
+    color: #ffcc00;
     text-shadow: rgb(1, 1, 193) 3px 2px 1px;
     margin: 16px;
 }
@@ -124,9 +135,17 @@ button:active {
     background-color: rgb(237, 199, 50) !important;
 }
 
+.credits {
+    display: flex;
+    justify-content: center;
+    font-family: "Noto Sans";
+    font-size: 14px;
+    font-weight: bold;
+    margin: 0px auto;
+    color: black;
+    margin: 0 auto;
+}
 
-test {
-    color: rgb(218, 218, 218);
-    color: grey;
-    color: rgb(0, 0, 0);
+.credits a:visited{
+    color: black;
 }
